@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts Hub | بوابة قطع الغيار</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap"
+        rel="stylesheet"
+    />
+    <style>
+        :root {
+            --primary: #1f6feb;
+            --primary-dark: #0f3d91;
+            --accent: #f1c40f;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7b8c;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(14px);
+            background: rgba(245, 247, 251, 0.92);
+            border-bottom: 1px solid rgba(31, 47, 63, 0.08);
+        }
+
+        .container {
+            width: min(1100px, 92vw);
+            margin: 0 auto;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0;
+        }
+
+        .logo {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .logo span:first-child {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            box-shadow: 0 10px 30px rgba(31, 111, 235, 0.25);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.75rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .hero {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            align-items: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.1rem, 4vw, 2.85rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.6rem;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            box-shadow: 0 16px 35px rgba(31, 111, 235, 0.35);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--primary-dark);
+            border: 1px solid rgba(31, 47, 63, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-visual {
+            position: relative;
+            background: #fff;
+            border-radius: 26px;
+            padding: 2.4rem 2rem;
+            box-shadow: 0 30px 60px rgba(15, 61, 145, 0.16);
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, rgba(31, 111, 235, 0.15), transparent);
+            z-index: -1;
+        }
+
+        .search-card {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .search-card label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .search-card select,
+        .search-card input,
+        .search-card textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(31, 47, 63, 0.12);
+            background: #f8faff;
+            font-size: 1rem;
+        }
+
+        .search-card textarea {
+            resize: none;
+            min-height: 120px;
+        }
+
+        .search-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+
+        .section {
+            padding: 2.5rem 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.6rem;
+        }
+
+        .section-title a {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--primary);
+            background: rgba(31, 111, 235, 0.12);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 0.8rem;
+        }
+
+        .categories {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .category-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 18px;
+            box-shadow: 0 20px 45px rgba(15, 61, 145, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 55px rgba(15, 61, 145, 0.18);
+        }
+
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .category-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .products-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: 0 24px 50px rgba(15, 61, 145, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card .badge {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            background: var(--accent);
+            color: #1f2933;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-card h3 {
+            margin: 1.4rem 0 0.6rem;
+            font-size: 1.15rem;
+        }
+
+        .product-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .product-meta span:last-child {
+            color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 1.8rem;
+            box-shadow: 0 24px 50px rgba(15, 61, 145, 0.12);
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .service-card strong {
+            font-size: 1.1rem;
+        }
+
+        .service-card span {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, rgba(31, 111, 235, 0.12), rgba(241, 196, 15, 0.18));
+            border-radius: 26px;
+            padding: 2.5rem;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .testimonial blockquote {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .testimonial cite {
+            color: var(--muted);
+            font-style: normal;
+        }
+
+        .cta {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: grid;
+            gap: 1.2rem;
+            box-shadow: 0 30px 60px rgba(15, 61, 145, 0.16);
+        }
+
+        .cta h3 {
+            font-size: 1.65rem;
+        }
+
+        footer {
+            padding: 2.5rem 0 2rem;
+            color: var(--muted);
+        }
+
+        footer .columns {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        footer h4 {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        footer ul {
+            list-style: none;
+            display: grid;
+            gap: 0.6rem;
+            font-size: 0.92rem;
+        }
+
+        footer .bottom {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-top: 1px solid rgba(31, 47, 63, 0.08);
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 720px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container topbar">
+            <a class="logo" href="#">
+                <span>AP</span>
+                <span>AutoParts Hub</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#search">البحث الذكي</a></li>
+                    <li><a href="#categories">التصنيفات</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#contact">الدعم</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero" id="search">
+            <div>
+                <span class="pill">كل ما تحتاجه لسيارتك</span>
+                <h1>اكتشف أسرع طريقة للعثور على قطع الغيار الأصلية والبديلة</h1>
+                <p>
+                    اربط رقم الهيكل (VIN) وتصفّح مخزوننا الضخم من القطع المعتمدة
+                    مع توصيل سريع لجميع مناطق المملكة وخيارات دعم فني متقدمة.
+                </p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="#">ابدأ البحث الآن</a>
+                    <a class="btn btn-secondary" href="#services">اطلع على خدمات الورش</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="search-card">
+                    <div class="search-grid">
+                        <label>
+                            الصنف
+                            <select>
+                                <option>اختر الفئة</option>
+                                <option>المحرك</option>
+                                <option>الكهرباء</option>
+                                <option>هيكل السيارة</option>
+                            </select>
+                        </label>
+                        <label>
+                            الماركة
+                            <select>
+                                <option>تويوتا</option>
+                                <option>هيونداي</option>
+                                <option>نيسان</option>
+                                <option>فورد</option>
+                            </select>
+                        </label>
+                        <label>
+                            الموديل
+                            <select>
+                                <option>اختر الموديل</option>
+                                <option>كورولا 2022</option>
+                                <option>سوناتا 2021</option>
+                                <option>باترول 2020</option>
+                            </select>
+                        </label>
+                        <label>
+                            رقم القطعة أو VIN
+                            <input type="text" placeholder="AA1234567890" />
+                        </label>
+                    </div>
+                    <a class="btn btn-primary btn-block" href="#">بحث متقدم</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="categories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>الفئات الأكثر طلبًا</h2>
+                    <a href="#">عرض كل التصنيفات</a>
+                </div>
+                <div class="categories">
+                    <article class="category-card">
+                        <h3>نظام المكابح</h3>
+                        <p>أقراص، فحمات، حساسات ABS، وأطقم الصيانة الدورية.</p>
+                    </article>
+                    <article class="category-card">
+                        <h3>أنظمة الكهرباء والإضاءة</h3>
+                        <p>بطاريات أصلية، دينامو، أنوار LED، ووحدات تحكم ذكية.</p>
+                    </article>
+                    <article class="category-card">
+                        <h3>زيوت ومواد استهلاكية</h3>
+                        <p>زيوت معتمدة، سوائل فرامل، وكيماويات حماية المحرك.</p>
+                    </article>
+                    <article class="category-card">
+                        <h3>إكسسوارات وحلول الراحة</h3>
+                        <p>شاشات ترفيه، أغطية مقاعد مخصصة، وحلول تخزين ذكية.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="featured">
+            <div class="container">
+                <div class="section-title">
+                    <h2>عروض مختارة لهذا الأسبوع</h2>
+                    <a href="#">تصفّح المزيد</a>
+                </div>
+                <div class="products-grid">
+                    <article class="product-card">
+                        <span class="badge">خصم %15</span>
+                        <h3>طقم فلاتر أصلي لتويوتا كورولا</h3>
+                        <p>يشمل فلتر الهواء، فلتر الزيت، وفلتر المكيف مع ضمان سنة كاملة.</p>
+                        <div class="product-meta">
+                            <span>المتوفر: 24 قطعة</span>
+                            <span>299 ر.س</span>
+                        </div>
+                    </article>
+                    <article class="product-card">
+                        <span class="badge">ضمان ممتد</span>
+                        <h3>دينامو هيونداي سوناتا</h3>
+                        <p>دينامو أصلي مع فحص قبل الشحن ودعم تركيب لدى شبكة الورش المعتمدة.</p>
+                        <div class="product-meta">
+                            <span>جاهز للشحن</span>
+                            <span>680 ر.س</span>
+                        </div>
+                    </article>
+                    <article class="product-card">
+                        <span class="badge">شامل التثبيت</span>
+                        <h3>ممتص صدمات باترول نيسان</h3>
+                        <p>مجموعة كاملة للأمام والخلف مع خدمة تركيب في موقع العميل داخل المدن الكبرى.</p>
+                        <div class="product-meta">
+                            <span>التوصيل خلال 24 ساعة</span>
+                            <span>1,250 ر.س</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>خدمات مضافة لراحة عملائك</h2>
+                    <a href="#">طلب شراكة</a>
+                </div>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <strong>ربط مباشر مع الورش</strong>
+                        <span>جدولة تلقائية لمواعيد التركيب مع أكثر من 120 ورشة معتمدة.</span>
+                    </article>
+                    <article class="service-card">
+                        <strong>لوحة تحكم للموردين</strong>
+                        <span>متابعة المخزون، الأسعار، وأداء الطلبات في الوقت الفعلي.</span>
+                    </article>
+                    <article class="service-card">
+                        <strong>تنبيهات ذكية للصيانة</strong>
+                        <span>رسائل نصية وتطبيقات توعوية لتذكير العملاء بالصيانة الدورية.</span>
+                    </article>
+                    <article class="service-card">
+                        <strong>دعم فني متعدد القنوات</strong>
+                        <span>محادثة فورية، واتساب للأعمال، وخط ساخن 24/7 لراحة العملاء.</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="testimonial">
+            <div class="container testimonial">
+                <blockquote>
+                    "منذ أن اعتمدنا AutoParts Hub ارتفعت نسبة رضا العملاء لدينا 45٪، وأصبح الوصول إلى القطع الأصليّة أسرع بثلاث مرات."</blockquote>
+                <cite>أحمد الشهري — مدير الصيانة في شركة أساطيل الرياض</cite>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container cta">
+                <div>
+                    <span class="pill">تواصل مع فريق الأعمال</span>
+                    <h3>لنخطّط معًا لتجربة شراء قطع غيار أكثر ذكاءً</h3>
+                    <p>
+                        املأ النموذج وسيتواصل معك أحد خبرائنا خلال 24 ساعة لتقديم عرض
+                        مخصص لشركتك وتكامل مع أنظمتك الحالية.
+                    </p>
+                </div>
+                <form class="search-card">
+                    <div class="search-grid">
+                        <label>
+                            الاسم الكامل
+                            <input type="text" placeholder="أدخل اسمك" required />
+                        </label>
+                        <label>
+                            اسم الشركة
+                            <input type="text" placeholder="المؤسسة أو الوكالة" required />
+                        </label>
+                        <label>
+                            البريد الإلكتروني
+                            <input type="email" placeholder="name@example.com" required />
+                        </label>
+                        <label>
+                            رقم التواصل
+                            <input type="tel" placeholder="05xxxxxxxx" required />
+                        </label>
+                    </div>
+                    <label>
+                        احتياجاتك الرئيسية
+                        <textarea rows="4" placeholder="أخبرنا عن التحديات التي تواجهها"></textarea>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        احجز مكالمة استشارية
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="columns">
+                <div>
+                    <a class="logo" href="#">
+                        <span>AP</span>
+                        <span>AutoParts Hub</span>
+                    </a>
+                    <p style="margin-top: 1rem;">
+                        منصة رقمية متكاملة لبيع وتوزيع قطع الغيار مع حلول لوجستية وتقنية متقدمة لخدمة وكلاء السيارات والورش.
+                    </p>
+                </div>
+                <div>
+                    <h4>المنتجات</h4>
+                    <ul>
+                        <li><a href="#">مستودع القطع</a></li>
+                        <li><a href="#">طلبات الشركات</a></li>
+                        <li><a href="#">تكامل ERP</a></li>
+                        <li><a href="#">التسعير الذكي</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">مكتبة الموارد</a></li>
+                        <li><a href="#">التدريب والاعتماد</a></li>
+                        <li><a href="#">سياسة الضمان</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>تابعنا</h4>
+                    <ul>
+                        <li><a href="#">تويتر</a></li>
+                        <li><a href="#">لينكدإن</a></li>
+                        <li><a href="#">يوتيوب</a></li>
+                        <li><a href="#">سناب شات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom">
+                <span>© 2024 AutoParts Hub. جميع الحقوق محفوظة.</span>
+                <div style="display: flex; gap: 1.2rem;">
+                    <a href="#">الشروط والأحكام</a>
+                    <a href="#">سياسة الخصوصية</a>
+                    <a href="#">اتفاقية الشركاء</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
